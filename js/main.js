@@ -53,7 +53,7 @@ class Component {
     element.style.backgroundColor = "#007bff";
     element.style.cursor = "pointer";
 
-    element.classList.add("btn");
+    element.classList.add("container__button");
 
     if (display) {
       Object.entries(display).forEach(([key, value]) => {
@@ -69,7 +69,7 @@ class Component {
 
     if (modifiers) {
       modifiers.forEach((modifier) => {
-        element.classList.add(`btn-${modifier}`);
+        element.classList.add(`${modifier}`);
       });
     }
 
@@ -110,6 +110,7 @@ let customButton = {
     padding: "10px 20px",
     fontWeight: "bold",
   },
+  modifiers: ["btn"],
   events: {
     click: () => {
       button.innerHTML = "Submitting...";
@@ -117,6 +118,7 @@ let customButton = {
       setTimeout(() => {
         button.innerHTML = "Submit";
         button.disabled = false;
+        button.style.backgroundColor = "#28a745";
       }, 3000);
     },
     focus: () => {
