@@ -101,7 +101,7 @@ const defaultOptions = {
 
 let button;
 
-let buttonData = {
+let customButton = {
   textValues: ["Submit"],
   display: {
     backgroundColor: "#28a745",
@@ -131,17 +131,17 @@ let buttonData = {
 };
 
 // Checks if the default button is being displayed
-// buttonData = null
+// customButton = null
 
 // Checks for displaying custom button if it is provided
 // Otherwise displaying a default button with default properties
-if (buttonData) {
-  button = new Component(defaultOptions).generateElement(buttonData);
+if (customButton) {
+  button = new Component(defaultOptions).generateElement(customButton);
 } else {
-  const defaultButtonData = {
+  const defaultButton = {
     textValues: ["Default"],
   };
-  button = new Component(defaultOptions).generateElement(defaultButtonData);
+  button = new Component(defaultOptions).generateElement(defaultButton);
 }
 
 container.appendChild(button);
