@@ -1,4 +1,11 @@
-class Component {
+// helper function
+const applyStyles = (element, styles) => {
+  Object.entries(styles).forEach(([key, value]) => {
+    element.style[key] = value;
+  });
+}
+// Main implementation of Button component based on Class
+class ButtonComponent {
   constructor(defaultOptions) {
     const {
       tag = "button",
@@ -56,34 +63,24 @@ class Component {
     element.classList.add("container__button");
 
     if (display) {
-      Object.entries(display).forEach(([key, value]) => {
-        element.style[key] = value;
-      });
+      applyStyles(element, display);
     }
 
     if (styles) {
-      Object.entries(styles).forEach(([key, value]) => {
-        element.style[key] = value;
-      });
+      applyStyles(element, styles);
     }
 
-    if (modifiers) {
-      modifiers.forEach((modifier) => {
-        element.classList.add(`${modifier}`);
-      });
-    }
+    modifiers?.forEach((modifier) => {
+      element.classList.add(modifier);
+    });
 
-    if (textValues) {
-      textValues.forEach((textValue) => {
-        element.innerHTML += textValue;
-      });
-    }
+    textValues?.forEach((textValue) => {
+      element.innerHTML += textValue;
+    });
 
-    if (events) {
-      Object.entries(events).forEach(([key, value]) => {
-        element.addEventListener(key, value);
-      });
-    }
+    Object.entries(events ?? {}).forEach(([key, value]) => {
+      element.addEventListener(key, value);
+    });
 
     return element;
   }
@@ -137,13 +134,11 @@ let customButton = {
 
 // Checks for displaying custom button if it is provided
 // Otherwise displaying a default button with default properties
-if (customButton) {
-  button = new Component(defaultOptions).generateElement(customButton);
-} else {
-  const defaultButton = {
-    textValues: ["Default"],
-  };
-  button = new Component(defaultOptions).generateElement(defaultButton);
-}
+button = new ButtonComponent(defaultOptions)
+  .generateElement
+  (customButton
+    ? customButton
+    : { textValues: ["Default"]
+  });
 
 container.appendChild(button);
